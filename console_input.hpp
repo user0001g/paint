@@ -2,17 +2,30 @@
 #include <iostream>
 #pragma once
 
-extern HANDLE hInput;
-extern INPUT_RECORD inputBuffer;
-extern DWORD eventsRead;
+class ConsoleInput {
 
-bool mouseMoved();
-bool mouseLeftClickHeld();
-bool mouseRightClickHeld();
-COORD getMousePosition();
+	private:
+		ConsoleInput();
+		HANDLE hInput;
+		INPUT_RECORD inputBuffer;
+		DWORD eventsRead;
 
-char keyPressed();
-bool ctrlHeld();
-bool consoleResized();
 
-void readInput();
+	public:
+		static ConsoleInput& getInput();
+
+		bool mouseMoved();
+		bool mouseLeftClickHeld();
+		bool mouseRightClickHeld();
+		COORD getMousePosition();
+
+		char keyPressed();
+		bool ctrlHeld();
+		bool consoleResized();
+
+		void readInput();
+
+		ConsoleInput(const ConsoleInput&) = delete;
+		ConsoleInput& operator=(const ConsoleInput&) = delete;
+};
+
